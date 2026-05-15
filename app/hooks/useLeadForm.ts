@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { submitLead } from "@/app/services/leads";
+import { useState, useCallback, useRef } from "react";
+import type { ChangeEvent, SyntheticEvent } from "react";
+import { submitLead, LeadSubmitError } from "@/app/services/leads";
 import type { ToastType } from "@/app/hooks/useToast";
 
 export interface FormData {
@@ -45,6 +46,14 @@ function validate(data: FormData): FormErrors {
   return errors;
 }
 
+const ERROR_MESSAGES: Record<string, string> = {
+  rate_limit: "Too many requests. Please wait 10 minutes before trying again.",
+  duplicate:  "We already have your details! Our team will reach out soon.",
+  captcha:    "CAPTCHA verification failed. Please try again.",
+  validation: "Please check your details and try again.",
+  server:     "Something went wrong. Please try again.",
+};
+
 interface UseLeadFormOptions {
   onToast: (type: ToastType, message: string) => void;
 }
@@ -53,9 +62,12 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
   const [formData, setFormData] = useState<FormData>(INITIAL);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
+  const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
+  const formLoadTimeRef = useRef<number>(Date.now());
 
   const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const { name, value } = e.target;
       setFormData((prev) => ({ ...prev, [name]: value }));
       setErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -64,7 +76,7 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
   );
 
   const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
+    async (e: SyntheticEvent) => {
       e.preventDefault();
 
       const validationErrors = validate(formData);
@@ -75,18 +87,45 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
 
       setIsSubmitting(true);
       try {
-        await submitLead(formData);
+        await submitLead({
+          payload: {
+            name:         formData.name,
+            businessName: formData.businessName,
+            phone:        formData.phone,
+            businessType: formData.businessType,
+            city:         formData.city,
+            captchaToken,
+          },
+          honeypot,
+          loadTime: formLoadTimeRef.current,
+        });
         setFormData(INITIAL);
         setErrors({});
+        setCaptchaToken(undefined);
         onToast("success", "Thanks! We'll contact you within 24 hours.");
-      } catch {
-        onToast("error", "Something went wrong. Please try again.");
+      } catch (err) {
+        if (err instanceof LeadSubmitError) {
+          onToast("error", ERROR_MESSAGES[err.type] ?? ERROR_MESSAGES.server);
+          if (err.type === "captcha") setCaptchaToken(undefined);
+        } else {
+          onToast("error", ERROR_MESSAGES.server);
+        }
       } finally {
         setIsSubmitting(false);
       }
     },
-    [formData, onToast]
+    [formData, honeypot, captchaToken, onToast]
   );
 
-  return { formData, errors, isSubmitting, handleChange, handleSubmit };
+  return {
+    formData,
+    errors,
+    isSubmitting,
+    honeypot,
+    setHoneypot,
+    captchaToken,
+    setCaptchaToken,
+    handleChange,
+    handleSubmit,
+  };
 }

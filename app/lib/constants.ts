@@ -73,15 +73,18 @@ export const PRICING = {
   yearlySavings: 10988,
 };
 
-export const BUSINESS_TYPES = [
-  "Retail Store",
-  "Restaurant / Café",
-  "Pharmacy",
-  "Electronics Shop",
-  "Clothing & Apparel",
-  "Grocery",
-  "Service Business",
-  "Other",
+export const BUSINESS_TYPES: { label: string; value: string }[] = [
+  { label: "Grocery Delivery",  value: "GROCERY"       },
+  { label: "Food Delivery",     value: "FOOD_DELIVERY"  },
+  { label: "Laundry",           value: "LAUNDRY"        },
+  { label: "Car / Bike Wash",   value: "CAR_WASH"       },
+  { label: "Pharmacy",          value: "PHARMACY"       },
+  { label: "Home Services",     value: "HOME_SERVICES"  },
+  { label: "E-Commerce",        value: "ECOMMERCE"      },
+  { label: "Cosmetics",         value: "COSMETICS"      },
+  { label: "Meat Delivery",     value: "MEAT_DELIVERY"  },
+  { label: "Furniture",         value: "FURNITURE"      },
+  { label: "Directory",         value: "DIRECTORY"      },
 ];
 
 export const HOW_IT_WORKS_STEPS = [

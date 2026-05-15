@@ -1,12 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, ChevronDown } from "lucide-react";
 import { BUSINESS_TYPES } from "@/app/lib/constants";
 import { useLeadForm } from "@/app/hooks/useLeadForm";
 import { useToast } from "@/app/hooks/useToast";
 import { Button } from "@/app/components/ui/Button";
 import { Toast } from "@/app/components/ui/Toast";
+import { TurnstileWidget } from "@/app/components/ui/Turnstile";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const perks = [
   "Free demo & consultation",
@@ -26,9 +29,16 @@ function fieldClass(hasError: boolean) {
 
 export default function LeadForm() {
   const { toast, showToast, dismissToast } = useToast();
-  const { formData, errors, isSubmitting, handleChange, handleSubmit } = useLeadForm({
-    onToast: showToast,
-  });
+  const {
+    formData,
+    errors,
+    isSubmitting,
+    honeypot,
+    setHoneypot,
+    setCaptchaToken,
+    handleChange,
+    handleSubmit,
+  } = useLeadForm({ onToast: showToast });
 
   return (
     <>
@@ -80,6 +90,18 @@ export default function LeadForm() {
                 <h3 className="text-lg font-bold text-[#1a3a6b] mb-1">
                   Book a Free Demo
                 </h3>
+
+                {/* Honeypot — invisible to humans, filled by bots */}
+                <input
+                  type="text"
+                  name="_hp"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  autoComplete="off"
+                  style={{ display: "none" }}
+                />
 
                 {/* Row 1 */}
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -148,22 +170,25 @@ export default function LeadForm() {
                     <label className="block text-xs font-semibold text-slate-500 mb-1.5">
                       Business Type *
                     </label>
-                    <select
-                      name="businessType"
-                      required
-                      value={formData.businessType}
-                      onChange={handleChange}
-                      className={fieldClass(!!errors.businessType)}
-                    >
-                      <option value="" disabled>
-                        Select type
-                      </option>
-                      {BUSINESS_TYPES.map((t) => (
-                        <option key={t} value={t}>
-                          {t}
+                    <div className="relative">
+                      <select
+                        name="businessType"
+                        required
+                        value={formData.businessType}
+                        onChange={handleChange}
+                        className={`${fieldClass(!!errors.businessType)} appearance-none pr-10`}
+                      >
+                        <option value="" disabled>
+                          Select Business Type
                         </option>
-                      ))}
-                    </select>
+                        {BUSINESS_TYPES.map((t) => (
+                          <option key={t.value} value={t.value}>
+                            {t.label}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    </div>
                     {errors.businessType && (
                       <p className="mt-1 text-xs text-red-500">{errors.businessType}</p>
                     )}
@@ -187,6 +212,15 @@ export default function LeadForm() {
                     )}
                   </div>
                 </div>
+
+                {/* Turnstile captcha (only rendered if site key is configured) */}
+                {TURNSTILE_SITE_KEY && (
+                  <TurnstileWidget
+                    siteKey={TURNSTILE_SITE_KEY}
+                    onSuccess={setCaptchaToken}
+                    onExpire={() => setCaptchaToken(undefined)}
+                  />
+                )}
 
                 {/* Submit */}
                 <Button

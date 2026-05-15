@@ -14,7 +14,7 @@ module.exports = {
       env_production: {
         NODE_ENV: 'production',
         PORT: 3001,
-        NEXT_PUBLIC_LEADS_API: 'https://api.quantixtechnology.in/api/public/leads',
+        NEXT_PUBLIC_LEADS_API: 'https://app.quantixtechnology.in/api/public/leads',
       },
       error_file: '/var/log/pm2/quantix-website-error.log',
       out_file: '/var/log/pm2/quantix-website-out.log',
