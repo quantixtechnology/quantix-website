@@ -1,0 +1,77 @@
+name: Deploy — Quantix Website
+
+on:
+  push:
+    branches:
+      - main
+
+# Cancel any in-progress deployment if a new push arrives
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build & Deploy to VPS
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Setup Node.js ─────────────────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # ── 3. Install & Build locally to catch errors before SSH ────────────
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production
+        run: npm run build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_LEADS_API: https://api.quantixtechnology.in/api/public/leads
+
+      # ── 4. SSH into VPS & deploy ─────────────────────────────────────────
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script_stop: true
+          script: |
+            set -e
+            echo "==> Navigating to project directory..."
+            cd /var/www/quantix-website
+
+            echo "==> Pulling latest code from main..."
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "==> Installing dependencies..."
+            npm ci --prefer-offline
+
+            echo "==> Building for production..."
+            NODE_ENV=production npm run build
+
+            echo "==> Restarting PM2 process..."
+            pm2 restart quantix-website --update-env || pm2 start npm --name "quantix-website" -- start
+
+            echo "==> Saving PM2 state..."
+            pm2 save
+
+            echo "==> Deploy complete!"
+            pm2 status quantix-website
+
+      # ── 5. Notify on failure ─────────────────────────────────────────────
+      - name: Notify on failure
+        if: failure()
+        run: echo "Deployment failed. Check the Actions log above."
