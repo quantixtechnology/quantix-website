@@ -385,8 +385,8 @@ export default function Hero() {
           <div className="flex flex-col">
             {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 12 }}
+              animate={{ y: 0 }}
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 self-start bg-[#eef2ff] border border-[#c7d7f7] text-[#1a3a6b] text-xs font-semibold px-4 py-1.5 rounded-full mb-6"
             >
@@ -396,8 +396,8 @@ export default function Hero() {
 
             {/* Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              animate={{ y: 0 }}
               transition={{ delay: 0.08, duration: 0.65 }}
               className="text-5xl sm:text-6xl xl:text-7xl font-black leading-[1.05] tracking-tight text-[#0f1f3d] mb-5"
             >
@@ -412,8 +412,8 @@ export default function Hero() {
 
             {/* Sub */}
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 16 }}
+              animate={{ y: 0 }}
               transition={{ delay: 0.18, duration: 0.55 }}
               className="text-base sm:text-lg text-slate-500 leading-relaxed mb-8 max-w-lg"
             >
@@ -423,8 +423,8 @@ export default function Hero() {
 
             {/* Trust indicators */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 12 }}
+              animate={{ y: 0 }}
               transition={{ delay: 0.25, duration: 0.5 }}
               className="grid grid-cols-3 gap-4 mb-8 pb-8 border-b border-slate-100"
             >
@@ -439,8 +439,8 @@ export default function Hero() {
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 12 }}
+              animate={{ y: 0 }}
               transition={{ delay: 0.32, duration: 0.5 }}
               className="flex flex-wrap gap-3 mb-8"
             >
@@ -455,8 +455,8 @@ export default function Hero() {
 
             {/* Pricing card */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 10 }}
+              animate={{ y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
               className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm"
             >
@@ -502,8 +502,8 @@ export default function Hero() {
 
             {/* Laptop — main, left-anchored */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 30 }}
+              animate={{ y: 0 }}
               transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" as const }}
               style={{ position: "absolute", left: 0, top: 40, width: "72%", zIndex: 10 }}
             >
@@ -512,8 +512,8 @@ export default function Hero() {
 
             {/* Phone — right edge, floating */}
             <motion.div
-              initial={{ opacity: 0, y: 40, x: 20 }}
-              animate={{ opacity: 1, y: 0, x: 0 }}
+              initial={{ y: 40, x: 20 }}
+              animate={{ y: 0, x: 0 }}
               transition={{ delay: 0.75, duration: 0.8, ease: "easeOut" as const }}
               style={{ position: "absolute", right: 0, top: 0, width: "32%", zIndex: 20 }}
             >
@@ -522,8 +522,8 @@ export default function Hero() {
 
             {/* Floating badge — bottom left of laptop */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
               transition={{ delay: 1.1, duration: 0.4 }}
               style={{ position: "absolute", left: 8, bottom: 30, zIndex: 30 }}
               className="bg-white rounded-2xl shadow-xl border border-slate-100 flex items-center gap-2.5 px-4 py-2.5"

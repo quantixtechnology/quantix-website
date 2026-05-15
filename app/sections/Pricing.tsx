@@ -19,8 +19,8 @@ export default function Pricing() {
         />
 
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 28 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" as const }}
           className="max-w-md mx-auto"

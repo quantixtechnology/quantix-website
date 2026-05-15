@@ -28,8 +28,8 @@ const container = {
 };
 
 const cardVariant = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+  hidden: { y: 24 },
+  show: { y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 export default function Features() {
@@ -103,8 +103,8 @@ export default function Features() {
 
         {/* Bottom targeting statement */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 16 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
           className="mt-16 text-center"

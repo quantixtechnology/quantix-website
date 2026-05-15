@@ -38,8 +38,8 @@ export default function HowItWorks() {
               return (
                 <motion.div
                   key={s.step}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ y: 24 }}
+                  whileInView={{ y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.15, duration: 0.5, ease: "easeOut" as const }}
                   className="flex flex-col items-center text-center"

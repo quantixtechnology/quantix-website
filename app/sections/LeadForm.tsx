@@ -37,8 +37,8 @@ export default function LeadForm() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left: Copy */}
             <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ x: -24 }}
+              whileInView={{ x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="text-white"
@@ -67,8 +67,8 @@ export default function LeadForm() {
 
             {/* Right: Form */}
             <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ x: 24 }}
+              whileInView={{ x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >

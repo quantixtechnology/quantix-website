@@ -71,8 +71,8 @@ export default function Screenshots() {
             return (
               <motion.div
                 key={s.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 20 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" as const }}
                 className="group rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg hover:shadow-slate-100 hover:-translate-y-1 transition-all duration-300 bg-white"
