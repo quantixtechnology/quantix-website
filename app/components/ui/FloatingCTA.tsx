@@ -115,7 +115,6 @@ export default function FloatingCTA() {
               className="flex items-center justify-between gap-3 px-4 py-3 border-t border-slate-100"
               style={{
                 background: "rgba(255,255,255,0.97)",
-                backdropFilter: "blur(14px)",
               }}
             >
               <div className="min-w-0">

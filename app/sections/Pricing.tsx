@@ -155,7 +155,6 @@ export default function Pricing() {
             className="group relative rounded-3xl overflow-hidden border flex flex-col hover:-translate-y-1 transition-transform duration-300"
             style={{
               background: "rgba(255,255,255,0.05)",
-              backdropFilter: "blur(16px)",
               borderColor: "rgba(255,255,255,0.10)",
             }}
             whileHover={{
@@ -352,7 +351,6 @@ export default function Pricing() {
             className="group relative rounded-3xl overflow-hidden border flex flex-col hover:-translate-y-1 transition-transform duration-300"
             style={{
               background: "rgba(255,255,255,0.05)",
-              backdropFilter: "blur(16px)",
               borderColor: "rgba(99,102,241,0.20)",
             }}
             whileHover={{

@@ -457,7 +457,6 @@ export default function WhatIsIncluded() {
                 className="group relative rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1.5"
                 style={{
                   background: "rgba(255,255,255,0.04)",
-                  backdropFilter: "blur(16px)",
                   borderColor: "rgba(255,255,255,0.08)",
                 }}
                 whileHover={{
@@ -512,7 +511,6 @@ export default function WhatIsIncluded() {
           style={{
             borderColor: "rgba(234,88,12,0.40)",
             background: "rgba(255,255,255,0.04)",
-            backdropFilter: "blur(18px)",
             boxShadow: "0 0 0 1px rgba(234,88,12,0.15), 0 32px 64px rgba(234,88,12,0.12)",
           }}
         >
@@ -686,7 +684,6 @@ export default function WhatIsIncluded() {
                   style={{
                     background: "rgba(15,23,42,0.95)",
                     border: "1px solid rgba(234,88,12,0.40)",
-                    backdropFilter: "blur(10px)",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -714,7 +711,6 @@ export default function WhatIsIncluded() {
                   style={{
                     background: "rgba(15,23,42,0.95)",
                     border: "1px solid rgba(34,197,94,0.35)",
-                    backdropFilter: "blur(10px)",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -748,7 +744,6 @@ export default function WhatIsIncluded() {
           style={{
             background:
               "linear-gradient(135deg, rgba(249,115,22,0.10) 0%, rgba(26,58,107,0.16) 100%)",
-            backdropFilter: "blur(16px)",
             border: "1px solid rgba(249,115,22,0.25)",
           }}
         >

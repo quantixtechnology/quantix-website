@@ -252,7 +252,6 @@ function FeaturedCard({
       className="group relative rounded-3xl overflow-hidden border border-white/10 flex flex-col hover:-translate-y-1.5 transition-transform duration-300"
       style={{
         background: "rgba(255,255,255,0.04)",
-        backdropFilter: "blur(14px)",
       }}
       whileHover={{ boxShadow: `0 28px 56px ${glowColor}` }}
     >
@@ -644,7 +643,6 @@ export default function BusinessTypes() {
             background:
               "linear-gradient(135deg, rgba(26,58,107,0.60) 0%, rgba(249,115,22,0.15) 100%)",
             border: "1px solid rgba(255,255,255,0.10)",
-            backdropFilter: "blur(14px)",
           }}
         >
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-8">
