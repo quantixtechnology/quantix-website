@@ -61,6 +61,7 @@ export const PLAN_FEATURES = [
   "Ecommerce Website",
   "Admin Dashboard Panel",
   "Android Admin App",
+  "Delivery Partner App",
   "POS Billing System",
   "24-hour setup & launch",
   "Priority support",
