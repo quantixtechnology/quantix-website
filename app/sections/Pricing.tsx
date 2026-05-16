@@ -41,10 +41,9 @@ function EcosystemStrip() {
   ];
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.1 }}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.35, ease: "easeOut" }}
       className="flex flex-wrap items-center justify-center gap-2 mb-14"
     >
       {products.map((p, i) => (
@@ -116,10 +115,9 @@ export default function Pricing() {
 
         {/* ── Header ── */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
           className="text-center mb-8"
         >
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#f97316] bg-[#f97316]/10 border border-[#f97316]/25 px-4 py-1.5 rounded-full mb-5">
@@ -152,10 +150,9 @@ export default function Pricing() {
 
           {/* ━━━ Card 1: Monthly ━━━ */}
           <motion.div
-            initial={{ y: 28, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.1 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
             className="group relative rounded-3xl overflow-hidden border flex flex-col hover:-translate-y-1 transition-transform duration-300"
             style={{
               background: "rgba(255,255,255,0.05)",
@@ -234,10 +231,9 @@ export default function Pricing() {
 
           {/* ━━━ Card 2: Annual — FEATURED ━━━ */}
           <motion.div
-            initial={{ y: 28, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
             className="relative rounded-3xl overflow-hidden flex flex-col md:-mt-6 md:mb-6"
             style={{
               boxShadow:
@@ -354,10 +350,9 @@ export default function Pricing() {
 
           {/* ━━━ Card 3: Custom Apps ━━━ */}
           <motion.div
-            initial={{ y: 28, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.2 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" }}
             className="group relative rounded-3xl overflow-hidden border flex flex-col hover:-translate-y-1 transition-transform duration-300"
             style={{
               background: "rgba(255,255,255,0.05)",
@@ -457,10 +452,9 @@ export default function Pricing() {
 
         {/* ── Trust row ── */}
         <motion.div
-          initial={{ y: 16, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.45, duration: 0.6 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
           className="flex flex-wrap justify-center gap-6 sm:gap-10 mt-14"
         >
           {[
