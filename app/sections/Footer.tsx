@@ -25,23 +25,24 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <a href="#" className="inline-flex mb-6 group">
               <div className="relative">
-                {/* Soft ambient glow — blends logo into dark background */}
+                {/* Brand-colored glow — uses the logo's own blue/cyan so it feels intentional */}
                 <div
                   aria-hidden
-                  className="absolute -inset-3 rounded-3xl pointer-events-none"
+                  className="absolute -inset-4 pointer-events-none"
                   style={{
-                    background: "radial-gradient(ellipse, rgba(255,255,255,0.12) 0%, transparent 70%)",
-                    filter: "blur(12px)",
+                    background:
+                      "radial-gradient(ellipse, rgba(37,99,235,0.30) 0%, rgba(6,182,212,0.12) 45%, transparent 70%)",
+                    filter: "blur(18px)",
                   }}
                 />
-                {/* Refined container — softer than flat white, has depth */}
+                {/* White container — needed so dark navy logo text stays readable */}
                 <div
                   className="relative rounded-2xl transition-transform duration-300 group-hover:scale-[1.03]"
                   style={{
-                    background: "rgba(255,255,255,0.94)",
+                    background: "rgba(255,255,255,0.96)",
                     padding: "10px 18px",
                     boxShadow:
-                      "0 0 0 1px rgba(255,255,255,0.08), 0 8px 28px rgba(0,0,0,0.40), 0 2px 8px rgba(0,0,0,0.20)",
+                      "0 0 0 1px rgba(37,99,235,0.18), 0 8px 32px rgba(0,0,0,0.50), 0 2px 12px rgba(37,99,235,0.15)",
                   }}
                 >
                   <Image

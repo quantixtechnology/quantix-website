@@ -33,8 +33,7 @@ export default function Navbar() {
               alt="Quantix Technology"
               width={220}
               height={147}
-              className="h-16 w-auto object-contain transition-opacity duration-300 hover:opacity-90"
-              style={{ mixBlendMode: "multiply" }}
+              className="h-16 w-auto object-contain"
               priority
             />
           </a>
