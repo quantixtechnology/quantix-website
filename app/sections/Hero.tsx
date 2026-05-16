@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, BarChart2, CheckCircle2, BadgeCheck } from "lucide-react";
+import { ArrowRight, ArrowDown, ShieldCheck, BarChart2, CheckCircle2, BadgeCheck } from "lucide-react";
 import { PRICING } from "@/app/lib/constants";
 import { ButtonLink } from "@/app/components/ui/Button";
 
@@ -539,6 +539,26 @@ export default function Hero() {
           </div>
 
         </div>
+      </div>
+
+      {/* Scroll-to-next arrow */}
+      <div className="flex justify-center pb-8">
+        <motion.button
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          onClick={() =>
+            document.getElementById("whats-included")?.scrollIntoView({ behavior: "smooth" })
+          }
+          aria-label="Scroll to next section"
+          className="flex items-center justify-center rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm cursor-pointer"
+          style={{
+            width: 40,
+            height: 40,
+            boxShadow: "0 4px 16px rgba(26,58,107,0.10)",
+          }}
+        >
+          <ArrowDown className="w-4 h-4 text-[#1a3a6b]" strokeWidth={2} />
+        </motion.button>
       </div>
     </section>
   );

@@ -10,6 +10,7 @@ import Screenshots from "@/app/sections/Screenshots";
 import LeadForm from "@/app/sections/LeadForm";
 import Footer from "@/app/sections/Footer";
 import FloatingCTA from "@/app/components/ui/FloatingCTA";
+import ScrollToTop from "@/app/components/ui/ScrollToTop";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
       </main>
       <Footer />
       <FloatingCTA />
+      <ScrollToTop />
     </>
   );
 }
