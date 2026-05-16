@@ -29,11 +29,11 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center shrink-0">
             <Image
-              src="/logo.png"
+              src="/New Logo.png"
               alt="Quantix Technology"
-              width={220}
-              height={147}
-              className="h-16 w-auto object-contain"
+              width={280}
+              height={187}
+              className="h-20 w-auto object-contain"
               priority
             />
           </a>

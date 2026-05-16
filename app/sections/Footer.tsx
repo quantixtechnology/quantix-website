@@ -47,11 +47,11 @@ export default function Footer() {
                 />
                 {/* White monochrome logo — no container, floats on dark bg */}
                 <Image
-                  src="/logo.png"
+                  src="/New Logo.png"
                   alt="Quantix Technology"
-                  width={400}
-                  height={134}
-                  className="relative h-[134px] w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+                  width={560}
+                  height={187}
+                  className="relative h-[187px] w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
                   style={{ filter: "brightness(0) invert(1)" }}
                 />
               </div>
