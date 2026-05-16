@@ -4,8 +4,8 @@ import WhatIsIncluded from "@/app/sections/WhatIsIncluded";
 import AppShowcase from "@/app/sections/AppShowcase";
 import Features from "@/app/sections/Features";
 import HowItWorks from "@/app/sections/HowItWorks";
-import PerfectFor from "@/app/sections/PerfectFor";
 import Pricing from "@/app/sections/Pricing";
+import BusinessTypes from "@/app/sections/BusinessTypes";
 import Screenshots from "@/app/sections/Screenshots";
 import LeadForm from "@/app/sections/LeadForm";
 import Footer from "@/app/sections/Footer";
@@ -21,8 +21,8 @@ export default function Home() {
         <AppShowcase />
         <Features />
         <HowItWorks />
-        <PerfectFor />
         <Pricing />
+        <BusinessTypes />
         <Screenshots />
         <LeadForm />
       </main>
