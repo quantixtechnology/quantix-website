@@ -31,9 +31,10 @@ export default function Navbar() {
             <Image
               src="/logo.png"
               alt="Quantix Technology"
-              width={200}
-              height={133}
-              className="h-14 w-auto object-contain"
+              width={220}
+              height={147}
+              className="h-16 w-auto object-contain transition-opacity duration-300 hover:opacity-90"
+              style={{ mixBlendMode: "multiply" }}
               priority
             />
           </a>

@@ -23,15 +23,35 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <a href="#" className="inline-flex mb-4">
-              <div className="bg-white rounded-xl px-3 py-2">
-                <Image
-                  src="/logo.png"
-                  alt="Quantix Technology"
-                  width={150}
-                  height={100}
-                  className="h-10 w-auto object-contain"
+            <a href="#" className="inline-flex mb-6 group">
+              <div className="relative">
+                {/* Soft ambient glow — blends logo into dark background */}
+                <div
+                  aria-hidden
+                  className="absolute -inset-3 rounded-3xl pointer-events-none"
+                  style={{
+                    background: "radial-gradient(ellipse, rgba(255,255,255,0.12) 0%, transparent 70%)",
+                    filter: "blur(12px)",
+                  }}
                 />
+                {/* Refined container — softer than flat white, has depth */}
+                <div
+                  className="relative rounded-2xl transition-transform duration-300 group-hover:scale-[1.03]"
+                  style={{
+                    background: "rgba(255,255,255,0.94)",
+                    padding: "10px 18px",
+                    boxShadow:
+                      "0 0 0 1px rgba(255,255,255,0.08), 0 8px 28px rgba(0,0,0,0.40), 0 2px 8px rgba(0,0,0,0.20)",
+                  }}
+                >
+                  <Image
+                    src="/logo.png"
+                    alt="Quantix Technology"
+                    width={160}
+                    height={107}
+                    className="h-12 w-auto object-contain"
+                  />
+                </div>
               </div>
             </a>
             <p className="text-blue-200 text-sm leading-relaxed max-w-xs mb-5">
