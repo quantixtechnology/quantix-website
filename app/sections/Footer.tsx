@@ -25,34 +25,35 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <a href="#" className="inline-flex mb-6 group">
               <div className="relative">
-                {/* Brand-colored glow — uses the logo's own blue/cyan so it feels intentional */}
+                {/* Resting brand aura */}
                 <div
                   aria-hidden
-                  className="absolute -inset-4 pointer-events-none"
+                  className="absolute -inset-5 pointer-events-none"
                   style={{
                     background:
-                      "radial-gradient(ellipse, rgba(37,99,235,0.30) 0%, rgba(6,182,212,0.12) 45%, transparent 70%)",
+                      "radial-gradient(ellipse 75% 55%, rgba(37,99,235,0.16) 0%, rgba(6,182,212,0.07) 50%, transparent 70%)",
+                    filter: "blur(14px)",
+                  }}
+                />
+                {/* Hover glow — cyan accent intensifies on hover */}
+                <div
+                  aria-hidden
+                  className="absolute -inset-5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse, rgba(6,182,212,0.24) 0%, transparent 65%)",
                     filter: "blur(18px)",
                   }}
                 />
-                {/* White container — needed so dark navy logo text stays readable */}
-                <div
-                  className="relative rounded-2xl transition-transform duration-300 group-hover:scale-[1.03]"
-                  style={{
-                    background: "rgba(255,255,255,0.96)",
-                    padding: "10px 18px",
-                    boxShadow:
-                      "0 0 0 1px rgba(37,99,235,0.18), 0 8px 32px rgba(0,0,0,0.50), 0 2px 12px rgba(37,99,235,0.15)",
-                  }}
-                >
-                  <Image
-                    src="/logo.png"
-                    alt="Quantix Technology"
-                    width={160}
-                    height={107}
-                    className="h-12 w-auto object-contain"
-                  />
-                </div>
+                {/* White monochrome logo — no container, floats on dark bg */}
+                <Image
+                  src="/logo.png"
+                  alt="Quantix Technology"
+                  width={180}
+                  height={120}
+                  className="relative h-14 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+                  style={{ filter: "brightness(0) invert(1)" }}
+                />
               </div>
             </a>
             <p className="text-blue-200 text-sm leading-relaxed max-w-xs mb-5">
