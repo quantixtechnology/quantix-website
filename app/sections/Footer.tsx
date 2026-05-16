@@ -24,37 +24,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <a href="#" className="inline-flex mb-6 group">
-              <div className="relative">
-                {/* Resting brand aura */}
-                <div
-                  aria-hidden
-                  className="absolute -inset-5 pointer-events-none"
-                  style={{
-                    background:
-                      "radial-gradient(ellipse 75% 55%, rgba(37,99,235,0.16) 0%, rgba(6,182,212,0.07) 50%, transparent 70%)",
-                    filter: "blur(14px)",
-                  }}
-                />
-                {/* Hover glow — cyan accent intensifies on hover */}
-                <div
-                  aria-hidden
-                  className="absolute -inset-5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background:
-                      "radial-gradient(ellipse, rgba(6,182,212,0.24) 0%, transparent 65%)",
-                    filter: "blur(18px)",
-                  }}
-                />
-                {/* White monochrome logo — no container, floats on dark bg */}
-                <Image
-                  src="/New Logo.png"
-                  alt="Quantix Technology"
-                  width={600}
-                  height={150}
-                  className="relative h-[150px] w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
-                  style={{ filter: "brightness(0) invert(1)" }}
-                />
-              </div>
+              <Image
+                src="/New Logo.png"
+                alt="Quantix Technology"
+                width={700}
+                height={176}
+                className="h-[176px] w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
             </a>
             <p className="text-blue-200 text-sm leading-relaxed max-w-xs mb-5">
               Billing, Inventory, Sales &amp; Reports — all in one powerful business
