@@ -29,7 +29,7 @@ export default function Footer() {
                 alt="Quantix Technology"
                 width={700}
                 height={176}
-                className="h-[176px] w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+                className="h-[141px] w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
                 style={{ filter: "brightness(0) invert(1)" }}
               />
             </a>
