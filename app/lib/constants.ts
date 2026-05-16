@@ -70,8 +70,9 @@ export const PLAN_FEATURES = [
 export const PRICING = {
   monthly: 4999,
   setup: 1999,
-  yearly: 49000,
-  yearlySavings: 10988,
+  yearly: 49999,
+  // 4999 × 12 = 59,988 → save 9,989 ≈ 2 months free
+  yearlySavings: 9989,
 };
 
 export const BUSINESS_TYPES: { label: string; value: string }[] = [
