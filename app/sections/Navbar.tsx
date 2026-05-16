@@ -31,9 +31,9 @@ export default function Navbar() {
             <Image
               src="/New Logo.png"
               alt="Quantix Technology"
-              width={280}
-              height={187}
-              className="h-20 w-auto object-contain"
+              width={320}
+              height={80}
+              className="h-14 w-auto object-contain"
               priority
             />
           </a>

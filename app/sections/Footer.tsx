@@ -49,9 +49,9 @@ export default function Footer() {
                 <Image
                   src="/New Logo.png"
                   alt="Quantix Technology"
-                  width={560}
-                  height={187}
-                  className="relative h-[187px] w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+                  width={600}
+                  height={150}
+                  className="relative h-[150px] w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
                   style={{ filter: "brightness(0) invert(1)" }}
                 />
               </div>
