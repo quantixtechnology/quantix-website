@@ -80,7 +80,6 @@ function EcosystemStrip() {
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export default function Pricing() {
-  const monthlyCost = PRICING.monthly * 12;   // 59,988
 
   return (
     <section
@@ -279,9 +278,6 @@ export default function Pricing() {
                   </span>
                 </div>
                 <p className="text-blue-300 text-xs mt-1">/year — billed once annually</p>
-                <p className="text-slate-500 text-xs line-through mt-0.5">
-                  ₹{monthlyCost.toLocaleString("en-IN")} if billed monthly
-                </p>
               </div>
 
               {/* 2 months free callout */}
@@ -295,10 +291,10 @@ export default function Pricing() {
                 <span className="text-green-400 text-sm">✦</span>
                 <div>
                   <p className="text-green-400 text-xs font-bold">
-                    Save ₹{PRICING.yearlySavings.toLocaleString("en-IN")} — equivalent to 2 months free
+                    2 Months FREE + Setup Included
                   </p>
                   <p className="text-green-600 text-xs font-semibold mt-0.5">
-                    No implementation charges included
+                    Everything included. No extra charges, ever.
                   </p>
                 </div>
               </div>
