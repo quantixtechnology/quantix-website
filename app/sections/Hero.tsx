@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowDown, ShieldCheck, BarChart2, CheckCircle2, BadgeCheck } from "lucide-react";
-import { PRICING } from "@/app/lib/constants";
 import { ButtonLink } from "@/app/components/ui/Button";
 
 // ─── Dashboard Laptop Mockup ────────────────────────────────────────────────
@@ -356,8 +355,6 @@ const trustItems = [
 ];
 
 export default function Hero() {
-  const savings = PRICING.monthly * 12 - PRICING.yearly;
-
   return (
     <section className="relative overflow-hidden bg-white">
       {/* Subtle background gradient */}
@@ -453,39 +450,6 @@ export default function Hero() {
               </ButtonLink>
             </motion.div>
 
-            {/* Pricing card */}
-            <motion.div
-              initial={{ y: 10 }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm"
-            >
-              <div className="grid grid-cols-3 divide-x divide-slate-100">
-                <div className="px-4 py-3">
-                  <p className="text-[11px] text-slate-400 mb-0.5">Monthly</p>
-                  <p className="text-xl font-black text-[#1a3a6b]">
-                    ₹{PRICING.monthly.toLocaleString("en-IN")}
-                  </p>
-                  <p className="text-[11px] text-slate-400">/ month</p>
-                </div>
-                <div className="px-4 py-3">
-                  <p className="text-[11px] text-slate-400 mb-0.5">One-Time Setup</p>
-                  <p className="text-xl font-black text-[#1a3a6b]">
-                    ₹{PRICING.setup.toLocaleString("en-IN")}
-                  </p>
-                  <p className="text-[11px] text-slate-400">setup fee</p>
-                </div>
-                <div className="px-4 py-3 relative">
-                  <p className="text-[11px] text-slate-400 mb-0.5">Annual Plan</p>
-                  <p className="text-xl font-black text-[#1a3a6b]">
-                    ₹{PRICING.yearly.toLocaleString("en-IN")}
-                  </p>
-                  <span className="inline-block text-[10px] font-bold text-green-700 bg-green-50 border border-green-100 rounded-full px-2 py-0.5 mt-0.5">
-                    Save ₹{savings.toLocaleString("en-IN")}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
           </div>
 
           {/* ── RIGHT: Device mockups ─────────────────────────────────── */}
