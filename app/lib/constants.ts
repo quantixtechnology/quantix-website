@@ -57,13 +57,13 @@ export const FEATURES_DATA = [
 ];
 
 export const PLAN_FEATURES = [
-  "1 Business App",
-  "Billing & POS",
-  "Inventory Management",
-  "Sales Reports",
-  "Staff Access",
-  "Customer Management",
-  "Priority Support",
+  "Customer Android App",
+  "Ecommerce Website",
+  "Admin Dashboard Panel",
+  "Android Admin App",
+  "POS Billing System",
+  "24-hour setup & launch",
+  "Priority support",
 ];
 
 export const PRICING = {
