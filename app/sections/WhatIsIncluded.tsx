@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Smartphone,
@@ -383,14 +382,6 @@ const cardVariant = {
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export default function WhatIsIncluded() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
   return (
     <section
       id="whats-included"
@@ -484,7 +475,7 @@ export default function WhatIsIncluded() {
                     }}
                   />
                   <div className="relative flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center sm:backdrop-blur-sm shrink-0">
                       <Icon className="w-5 h-5 text-white" />
                     </div>
                     <h3 className="text-base font-bold text-white leading-tight">{product.title}</h3>
@@ -559,7 +550,7 @@ export default function WhatIsIncluded() {
                   }}
                 />
                 <div className="relative flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center sm:backdrop-blur-sm shrink-0">
                     <Bike className="w-5 h-5 text-white" />
                   </div>
                   <div>
@@ -572,7 +563,7 @@ export default function WhatIsIncluded() {
                   </div>
                 </div>
                 {/* Play Store badge */}
-                <div className="relative flex items-center gap-2 bg-black/30 backdrop-blur-sm rounded-xl px-3 py-2 w-fit">
+                <div className="relative flex items-center gap-2 bg-black/30 sm:backdrop-blur-sm rounded-xl px-3 py-2 w-fit">
                   <PlayCircle className="w-4 h-4 text-white shrink-0" />
                   <div>
                     <p style={{ fontSize: 8, color: "rgba(255,255,255,0.75)", margin: 0 }}>
@@ -633,39 +624,32 @@ export default function WhatIsIncluded() {
             {/* Visible on all screen sizes; appears above content on mobile via order-first */}
             <div
               className="flex items-center justify-center relative py-8 px-4 lg:py-10 lg:px-6 order-first lg:order-none overflow-hidden"
-              style={{ contain: "layout paint", isolation: "isolate" }}
+              style={{ isolation: "isolate" }}
             >
-              {/* Glow behind phone */}
+              {/* Glow behind phone — subtle single value safe on all devices */}
               <div
                 aria-hidden
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: isMobile
-                    ? "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(234,88,12,0.07) 0%, transparent 70%)"
-                    : "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(234,88,12,0.12) 0%, transparent 70%)",
+                  background: "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(234,88,12,0.08) 0%, transparent 70%)",
                 }}
               />
 
-              {/* Floating phone */}
+              {/* Floating phone — single constant animation, no isMobile branching */}
               <motion.div
-                animate={isMobile ? { y: [0, -6, 0] } : { y: [0, -14, 0], x: [0, 4, 0] }}
-                transition={isMobile
-                  ? { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                  : { duration: 5.5, repeat: Infinity, ease: "easeInOut" }
-                }
-                style={{ position: "relative", zIndex: 10, willChange: isMobile ? "auto" : "transform" }}
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                style={{ position: "relative", willChange: "auto" }}
               >
-                {/* Phone frame — 190×380 works well on both mobile and desktop */}
+                {/* Phone frame */}
                 <div
                   style={{
-                    width: isMobile ? 170 : 190,
-                    height: isMobile ? 340 : 380,
+                    width: 175,
+                    height: 355,
                     borderRadius: 38,
                     padding: 6,
                     background: "linear-gradient(145deg,#1e293b,#0f172a)",
-                    boxShadow: isMobile
-                      ? "0 16px 32px rgba(0,0,0,0.40), 0 0 20px rgba(234,88,12,0.15)"
-                      : "0 36px 72px rgba(0,0,0,0.60), 0 0 52px rgba(234,88,12,0.28), 0 0 0 1px rgba(255,255,255,0.06)",
+                    boxShadow: "0 20px 48px rgba(0,0,0,0.50), 0 0 28px rgba(234,88,12,0.18)",
                   }}
                 >
                   {/* Dynamic island */}
