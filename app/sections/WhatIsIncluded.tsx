@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Smartphone,
@@ -382,12 +383,21 @@ const cardVariant = {
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export default function WhatIsIncluded() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <section
       id="whats-included"
       className="relative py-20 sm:py-28 overflow-hidden"
       style={{
         background: "linear-gradient(160deg, #060d1a 0%, #0a1628 40%, #0f1f3d 70%, #0a1628 100%)",
+        isolation: "isolate",
       }}
     >
       {/* Ambient blobs */}
@@ -512,6 +522,8 @@ export default function WhatIsIncluded() {
             borderColor: "rgba(234,88,12,0.40)",
             background: "rgba(255,255,255,0.04)",
             boxShadow: "0 0 0 1px rgba(234,88,12,0.15), 0 32px 64px rgba(234,88,12,0.12)",
+            isolation: "isolate",
+            contain: "layout paint",
           }}
         >
           {/* USP badge */}
@@ -619,33 +631,41 @@ export default function WhatIsIncluded() {
 
             {/* ── Right: floating phone mockup ── */}
             {/* Visible on all screen sizes; appears above content on mobile via order-first */}
-            <div className="flex items-center justify-center relative py-8 px-4 lg:py-10 lg:px-6 order-first lg:order-none overflow-hidden">
+            <div
+              className="flex items-center justify-center relative py-8 px-4 lg:py-10 lg:px-6 order-first lg:order-none overflow-hidden"
+              style={{ contain: "layout paint", isolation: "isolate" }}
+            >
               {/* Glow behind phone */}
               <div
                 aria-hidden
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background:
-                    "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(234,88,12,0.12) 0%, transparent 70%)",
+                  background: isMobile
+                    ? "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(234,88,12,0.07) 0%, transparent 70%)"
+                    : "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(234,88,12,0.12) 0%, transparent 70%)",
                 }}
               />
 
               {/* Floating phone */}
               <motion.div
-                animate={{ y: [0, -14, 0], x: [0, 4, 0] }}
-                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-                style={{ position: "relative", zIndex: 10 }}
+                animate={isMobile ? { y: [0, -6, 0] } : { y: [0, -14, 0], x: [0, 4, 0] }}
+                transition={isMobile
+                  ? { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                  : { duration: 5.5, repeat: Infinity, ease: "easeInOut" }
+                }
+                style={{ position: "relative", zIndex: 10, willChange: isMobile ? "auto" : "transform" }}
               >
                 {/* Phone frame — 190×380 works well on both mobile and desktop */}
                 <div
                   style={{
-                    width: 190,
-                    height: 380,
+                    width: isMobile ? 170 : 190,
+                    height: isMobile ? 340 : 380,
                     borderRadius: 38,
                     padding: 6,
                     background: "linear-gradient(145deg,#1e293b,#0f172a)",
-                    boxShadow:
-                      "0 36px 72px rgba(0,0,0,0.60), 0 0 52px rgba(234,88,12,0.28), 0 0 0 1px rgba(255,255,255,0.06)",
+                    boxShadow: isMobile
+                      ? "0 16px 32px rgba(0,0,0,0.40), 0 0 20px rgba(234,88,12,0.15)"
+                      : "0 36px 72px rgba(0,0,0,0.60), 0 0 52px rgba(234,88,12,0.28), 0 0 0 1px rgba(255,255,255,0.06)",
                   }}
                 >
                   {/* Dynamic island */}

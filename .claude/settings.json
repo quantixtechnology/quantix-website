@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git push origin main",
+            "timeout": 60,
+            "statusMessage": "Deploying to production..."
+          }
+        ]
+      }
+    ]
+  }
+}
