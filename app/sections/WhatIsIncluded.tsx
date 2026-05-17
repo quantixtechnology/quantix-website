@@ -504,8 +504,8 @@ export default function WhatIsIncluded() {
 
         {/* ── 6th Product: Delivery Partner App — Featured Spotlight ── */}
         <motion.div
-          initial={{ y: 32, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, delay: 0.1 }}
           className="relative rounded-3xl overflow-hidden border mb-5"
@@ -514,7 +514,6 @@ export default function WhatIsIncluded() {
             background: "rgba(255,255,255,0.04)",
             boxShadow: "0 0 0 1px rgba(234,88,12,0.15), 0 32px 64px rgba(234,88,12,0.12)",
             isolation: "isolate",
-            contain: "layout paint",
           }}
         >
           {/* USP badge */}
@@ -621,38 +620,74 @@ export default function WhatIsIncluded() {
             </div>
 
             {/* ── Right: floating phone mockup ── */}
-            {/* Visible on all screen sizes; appears above content on mobile via order-first */}
             <div
               className="flex items-center justify-center relative py-8 px-4 lg:py-10 lg:px-6 order-first lg:order-none overflow-hidden"
-              style={{ isolation: "isolate" }}
             >
-              {/* Glow behind phone — subtle single value safe on all devices */}
+              {/* Glow — desktop only; avoid extra GPU layer on mobile */}
               <div
                 aria-hidden
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0 pointer-events-none hidden lg:block"
                 style={{
-                  background: "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(234,88,12,0.08) 0%, transparent 70%)",
+                  background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(234,88,12,0.12) 0%, transparent 70%)",
                 }}
               />
 
-              {/* Floating phone — single constant animation, no isMobile branching */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                style={{ position: "relative", willChange: "auto" }}
-              >
-                {/* Phone frame */}
+              {/* ── Mobile: static phone, zero animation, zero GPU promotion ── */}
+              <div className="lg:hidden" style={{ position: "relative" }}>
                 <div
                   style={{
-                    width: 175,
-                    height: 355,
+                    width: 170,
+                    height: 340,
+                    borderRadius: 36,
+                    padding: 5,
+                    background: "linear-gradient(145deg,#1e293b,#0f172a)",
+                    boxShadow: "0 12px 28px rgba(0,0,0,0.45)",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 10,
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: 48,
+                      height: 8,
+                      borderRadius: 4,
+                      background: "#0f172a",
+                      zIndex: 10,
+                    }}
+                  />
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: 32,
+                      overflow: "hidden",
+                      position: "relative",
+                    }}
+                  >
+                    <DeliveryAppScreen />
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Desktop: animated phone with floating badges ── */}
+              <motion.div
+                className="hidden lg:block"
+                animate={{ y: [0, -14, 0], x: [0, 4, 0] }}
+                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+                style={{ position: "relative" }}
+              >
+                <div
+                  style={{
+                    width: 190,
+                    height: 380,
                     borderRadius: 38,
                     padding: 6,
                     background: "linear-gradient(145deg,#1e293b,#0f172a)",
-                    boxShadow: "0 20px 48px rgba(0,0,0,0.50), 0 0 28px rgba(234,88,12,0.18)",
+                    boxShadow: "0 36px 72px rgba(0,0,0,0.60), 0 0 52px rgba(234,88,12,0.28), 0 0 0 1px rgba(255,255,255,0.06)",
                   }}
                 >
-                  {/* Dynamic island */}
                   <div
                     style={{
                       position: "absolute",
@@ -666,7 +701,6 @@ export default function WhatIsIncluded() {
                       zIndex: 10,
                     }}
                   />
-                  {/* Screen */}
                   <div
                     style={{
                       width: "100%",
@@ -680,11 +714,11 @@ export default function WhatIsIncluded() {
                   </div>
                 </div>
 
-                {/* Floating notification badge — desktop only (avoids overflow on mobile) */}
+                {/* Floating notification badge */}
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute -left-14 top-20 items-center gap-2 rounded-2xl px-3 py-2.5 shadow-xl hidden lg:flex"
+                  className="absolute -left-14 top-20 flex items-center gap-2 rounded-2xl px-3 py-2.5 shadow-xl"
                   style={{
                     background: "rgba(15,23,42,0.95)",
                     border: "1px solid rgba(234,88,12,0.40)",
@@ -698,20 +732,16 @@ export default function WhatIsIncluded() {
                     <Package className="w-3.5 h-3.5" style={{ color: "#ea580c" }} />
                   </div>
                   <div>
-                    <p style={{ fontSize: 9, fontWeight: 700, color: "white", margin: 0 }}>
-                      New Order!
-                    </p>
-                    <p style={{ fontSize: 8, color: "#94a3b8", margin: 0 }}>
-                      #2853 · Dadar West
-                    </p>
+                    <p style={{ fontSize: 9, fontWeight: 700, color: "white", margin: 0 }}>New Order!</p>
+                    <p style={{ fontSize: 8, color: "#94a3b8", margin: 0 }}>#2853 · Dadar West</p>
                   </div>
                 </motion.div>
 
-                {/* Delivered badge — desktop only */}
+                {/* Delivered badge */}
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                  className="absolute -right-12 bottom-24 items-center gap-2 rounded-2xl px-3 py-2.5 shadow-xl hidden lg:flex"
+                  className="absolute -right-12 bottom-24 flex items-center gap-2 rounded-2xl px-3 py-2.5 shadow-xl"
                   style={{
                     background: "rgba(15,23,42,0.95)",
                     border: "1px solid rgba(34,197,94,0.35)",
@@ -725,12 +755,8 @@ export default function WhatIsIncluded() {
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
                   </div>
                   <div>
-                    <p style={{ fontSize: 9, fontWeight: 700, color: "#22c55e", margin: 0 }}>
-                      Delivered!
-                    </p>
-                    <p style={{ fontSize: 8, color: "#94a3b8", margin: 0 }}>
-                      ₹45 earned
-                    </p>
+                    <p style={{ fontSize: 9, fontWeight: 700, color: "#22c55e", margin: 0 }}>Delivered!</p>
+                    <p style={{ fontSize: 8, color: "#94a3b8", margin: 0 }}>₹45 earned</p>
                   </div>
                 </motion.div>
               </motion.div>
