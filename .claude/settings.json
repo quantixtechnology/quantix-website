@@ -1,13 +1,14 @@
 {
   "hooks": {
-    "Stop": [
+    "PostToolUse": [
       {
+        "matcher": "Write|Edit",
         "hooks": [
           {
             "type": "command",
-            "command": "git push origin main",
-            "timeout": 60,
-            "statusMessage": "Deploying to production..."
+            "command": "if [ -n \"$(git status --porcelain)\" ]; then git add . && git commit -m \"chore: auto-deploy $(date '+%Y-%m-%d %H:%M')\" && git push origin main; fi",
+            "timeout": 120,
+            "statusMessage": "Committing and deploying to production..."
           }
         ]
       }
