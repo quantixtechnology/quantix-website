@@ -20,6 +20,18 @@ export const metadata: Metadata = {
     "POS software",
     "Quantix Technology",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico?v=2", sizes: "any" },
+      { url: "/favicon/favicon-16x16.png?v=2", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png?v=2", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon/favicon.ico?v=2",
+    apple: "/favicon/apple-touch-icon.png?v=2",
+    other: [
+      { rel: "manifest", url: "/favicon/site.webmanifest" },
+    ],
+  },
   openGraph: {
     title: "Quantix Technology — Business Management Software",
     description:
