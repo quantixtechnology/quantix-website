@@ -12,32 +12,39 @@ import {
   GitBranch,
   Layers,
   MessageSquare,
+  Store,
+  AlertCircle,
 } from "lucide-react";
-import { PRICING, PLAN_FEATURES } from "@/app/lib/constants";
+import { PRICING, STARTER_FEATURES, BUSINESS_EXTRA_FEATURES } from "@/app/lib/constants";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const CUSTOM_FEATURES = [
-  { icon: Sparkles, text: "Fully custom app development" },
-  { icon: GitBranch, text: "Multi-branch & multi-location support" },
-  { icon: Layers, text: "Advanced workflows & automation" },
-  { icon: Building2, text: "Enterprise integrations & API access" },
-  { icon: Shield, text: "Custom branding & white-labelling" },
-  { icon: Star, text: "Dedicated account manager" },
-  { icon: Zap, text: "Scalable cloud infrastructure" },
-  { icon: MessageSquare, text: "Advanced reports & analytics" },
+  { icon: Sparkles, text: "Custom Development" },
+  { icon: GitBranch, text: "Multi-Store Solutions" },
+  { icon: Layers, text: "Enterprise Features" },
+  { icon: Building2, text: "Custom Integrations" },
+  { icon: Shield, text: "White Label Options" },
+  { icon: Star, text: "Dedicated Support" },
+];
+
+const ADDITIONAL_STORE_FEATURES = [
+  "Additional Store Management",
+  "Store-wise Orders",
+  "Store-wise Inventory",
+  "Store-wise Reporting",
 ];
 
 // ─── Ecosystem strip ──────────────────────────────────────────────────────────
 
 function EcosystemStrip() {
   const products = [
-    "Customer App",
-    "Ecommerce Website",
+    "Customer Website",
+    "Android App",
     "Admin Panel",
-    "Delivery Partner App",
-    "POS Billing",
-    "Mobile Admin",
+    "POS System",
+    "PWA",
+    "Delivery App",
   ];
   return (
     <motion.div
@@ -71,7 +78,7 @@ function EcosystemStrip() {
           color: "#f97316",
         }}
       >
-        All Included
+        Business Plan
       </span>
     </motion.div>
   );
@@ -80,7 +87,6 @@ function EcosystemStrip() {
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export default function Pricing() {
-
   return (
     <section
       id="pricing"
@@ -136,8 +142,8 @@ export default function Pricing() {
             </span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            No hidden fees. Everything you need to launch your business — apps, website,
-            admin panel, delivery management, and POS — in one plan.
+            No hidden fees. One-time setup charge of ₹1,999 applies to Starter
+            and Business plans. Everything you need to launch and grow.
           </p>
         </motion.div>
 
@@ -147,7 +153,7 @@ export default function Pricing() {
         {/* ── 3-column pricing grid ── */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto items-stretch">
 
-          {/* ━━━ Card 1: Monthly ━━━ */}
+          {/* ━━━ Card 1: Starter ━━━ */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -166,7 +172,7 @@ export default function Pricing() {
               {/* Label row */}
               <div className="flex items-center justify-between mb-6">
                 <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-                  Monthly
+                  Starter
                 </span>
                 <span
                   className="text-xs font-bold px-3 py-1 rounded-full"
@@ -176,7 +182,7 @@ export default function Pricing() {
                     color: "#f97316",
                   }}
                 >
-                  Launch Offer
+                  Best to Start
                 </span>
               </div>
 
@@ -184,7 +190,7 @@ export default function Pricing() {
               <div className="mb-6">
                 <div className="flex items-end gap-1 mb-1.5">
                   <span className="text-5xl font-black text-white leading-none">
-                    ₹{PRICING.monthly.toLocaleString("en-IN")}
+                    ₹{PRICING.starter.toLocaleString("en-IN")}
                   </span>
                   <span className="text-slate-400 text-sm mb-1">/month</span>
                 </div>
@@ -196,11 +202,11 @@ export default function Pricing() {
                   />
                   <span className="text-slate-400 text-xs">
                     ₹{PRICING.setup.toLocaleString("en-IN")}{" "}
-                    <span className="text-slate-500">one-time setup fee</span>
+                    <span className="text-slate-500">one-time setup charge</span>
                   </span>
                 </div>
                 <p className="text-slate-600 text-xs mt-1.5">
-                  Cancel anytime. No lock-in.
+                  Best for businesses starting online ordering without mobile apps.
                 </p>
               </div>
 
@@ -209,7 +215,7 @@ export default function Pricing() {
 
               {/* Feature list */}
               <ul className="space-y-2.5 flex-1 mb-6">
-                {PLAN_FEATURES.map((f) => (
+                {STARTER_FEATURES.map((f) => (
                   <li key={f} className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-slate-500 shrink-0" />
                     <span className="text-xs text-slate-400">{f}</span>
@@ -227,7 +233,7 @@ export default function Pricing() {
             </div>
           </motion.div>
 
-          {/* ━━━ Card 2: Annual — FEATURED ━━━ */}
+          {/* ━━━ Card 2: Business — FEATURED ━━━ */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -262,48 +268,56 @@ export default function Pricing() {
               {/* Label row */}
               <div className="flex items-center justify-between mb-6">
                 <span className="text-xs font-semibold uppercase tracking-widest text-blue-300">
-                  Annual Plan
+                  Business
                 </span>
-                <span className="bg-green-500/20 text-green-400 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                  🎁 2 Months FREE
+                <span className="bg-green-500/20 text-green-400 text-xs font-bold px-3 py-1 rounded-full">
+                  Complete Ecosystem
                 </span>
               </div>
 
               {/* Price */}
               <div className="mb-2">
-                <div className="flex items-end gap-1 mb-1">
+                <div className="flex items-end gap-1 mb-1.5">
                   <span className="text-5xl font-black text-white leading-none">
-                    ₹{PRICING.yearly.toLocaleString("en-IN")}
+                    ₹{PRICING.business.toLocaleString("en-IN")}
+                  </span>
+                  <span className="text-slate-300 text-sm mb-1">/month</span>
+                </div>
+                <div className="flex items-center gap-1.5 mt-2">
+                  <span
+                    className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                    style={{ background: "#f97316" }}
+                  />
+                  <span className="text-slate-300 text-xs">
+                    ₹{PRICING.setup.toLocaleString("en-IN")}{" "}
+                    <span className="text-slate-400">one-time setup charge</span>
                   </span>
                 </div>
-                <p className="text-blue-300 text-xs mt-1">/year — billed once annually</p>
+                <p className="text-blue-300 text-xs mt-1.5">
+                  Best for businesses requiring a complete ordering and delivery ecosystem.
+                </p>
               </div>
 
-              {/* 2 months free callout */}
+              {/* Everything in Starter callout */}
               <div
-                className="flex items-center gap-2 rounded-xl px-4 py-2.5 mb-5"
+                className="flex items-center gap-2 rounded-xl px-4 py-2.5 mb-4"
                 style={{
                   background: "rgba(34,197,94,0.10)",
                   border: "1px solid rgba(34,197,94,0.25)",
                 }}
               >
                 <span className="text-green-400 text-sm">✦</span>
-                <div>
-                  <p className="text-green-400 text-xs font-bold">
-                    2 Months FREE + Setup Included
-                  </p>
-                  <p className="text-green-600 text-xs font-semibold mt-0.5">
-                    Everything included. No extra charges, ever.
-                  </p>
-                </div>
+                <p className="text-green-400 text-xs font-bold">
+                  Everything in Starter Plan, plus:
+                </p>
               </div>
 
               {/* Divider */}
-              <div className="h-px mb-5" style={{ background: "rgba(255,255,255,0.08)" }} />
+              <div className="h-px mb-4" style={{ background: "rgba(255,255,255,0.08)" }} />
 
-              {/* Feature list */}
-              <ul className="space-y-2.5 flex-1 mb-5">
-                {PLAN_FEATURES.map((item) => (
+              {/* Business extras */}
+              <ul className="space-y-2.5 flex-1 mb-4">
+                {BUSINESS_EXTRA_FEATURES.map((item) => (
                   <li key={item} className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-[#f97316] shrink-0" />
                     <span className="text-sm text-slate-200">{item}</span>
@@ -311,7 +325,7 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              {/* Ecosystem line */}
+              {/* Android apps launching soon note */}
               <div
                 className="rounded-xl px-4 py-3 mb-5"
                 style={{
@@ -320,8 +334,9 @@ export default function Pricing() {
                 }}
               >
                 <p className="text-[11px] text-slate-400 leading-relaxed">
-                  <span className="text-[#f97316] font-semibold">Complete ecosystem:</span>{" "}
-                  Customer App · Website · Admin Panel · Delivery App · POS · Mobile Admin
+                  <span className="text-[#f97316] font-semibold">Note:</span>{" "}
+                  Customer &amp; Delivery Android Apps are launching soon. Until then,
+                  customers can use the Website and PWA without any limitations.
                 </p>
               </div>
 
@@ -334,16 +349,16 @@ export default function Pricing() {
                   boxShadow: "0 8px 32px rgba(249,115,22,0.45)",
                 }}
               >
-                Launch My App
+                Get Started
                 <ArrowRight className="w-4 h-4" />
               </a>
               <p className="text-center text-xs text-slate-500 mt-3">
-                No setup charges. No hidden fees. Cancel anytime.
+                No hidden fees. Cancel anytime.
               </p>
             </div>
           </motion.div>
 
-          {/* ━━━ Card 3: Custom Apps ━━━ */}
+          {/* ━━━ Card 3: Custom ━━━ */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -362,7 +377,7 @@ export default function Pricing() {
               {/* Label row */}
               <div className="flex items-center justify-between mb-6">
                 <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-                  Custom Apps
+                  Custom
                 </span>
                 <span
                   className="text-xs font-bold px-3 py-1 rounded-full"
@@ -384,7 +399,7 @@ export default function Pricing() {
                   </span>
                 </div>
                 <p className="text-slate-500 text-xs mt-1">
-                  For unique business requirements
+                  Contact us / Request a quote
                 </p>
               </div>
 
@@ -398,11 +413,12 @@ export default function Pricing() {
               >
                 <Building2 className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Tailored platform for{" "}
+                  Tailored for{" "}
                   <span className="text-white font-semibold">
-                    multi-branch businesses, enterprises,
+                    multi-store businesses, enterprises,
                   </span>{" "}
-                  and complex delivery operations.
+                  and complex operations.{" "}
+                  <span className="text-indigo-400 font-semibold">No setup charge.</span>
                 </p>
               </div>
 
@@ -434,7 +450,7 @@ export default function Pricing() {
                 }}
               >
                 <MessageSquare className="w-4 h-4" />
-                Get Custom Quote
+                Request Quote
               </a>
               <p className="text-center text-xs text-slate-500 mt-3">
                 Response within 24 hours.
@@ -444,11 +460,101 @@ export default function Pricing() {
 
         </div>
 
+        {/* ── Additional Store add-on card ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.35, ease: "easeOut" }}
+          className="max-w-6xl mx-auto mt-5"
+        >
+          <div
+            className="rounded-3xl border flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8 p-6 sm:p-8 hover:-translate-y-0.5 transition-transform duration-300"
+            style={{
+              background: "rgba(255,255,255,0.04)",
+              borderColor: "rgba(255,255,255,0.10)",
+            }}
+          >
+            <div className="shrink-0">
+              <div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: "rgba(249,115,22,0.15)",
+                  border: "1px solid rgba(249,115,22,0.30)",
+                }}
+              >
+                <Store className="w-6 h-6 text-[#f97316]" />
+              </div>
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-3 mb-1">
+                <h3 className="text-white font-bold text-base">Additional Store</h3>
+                <span
+                  className="text-xs font-bold px-2.5 py-1 rounded-full"
+                  style={{
+                    background: "rgba(249,115,22,0.15)",
+                    border: "1px solid rgba(249,115,22,0.30)",
+                    color: "#f97316",
+                  }}
+                >
+                  Add-On
+                </span>
+              </div>
+              <p className="text-[#f97316] font-black text-xl mb-2">
+                ₹{PRICING.additionalStore.toLocaleString("en-IN")}
+                <span className="text-slate-400 font-normal text-sm">/month per store</span>
+              </p>
+              <div className="flex flex-wrap gap-x-5 gap-y-1.5">
+                {ADDITIONAL_STORE_FEATURES.map((f) => (
+                  <span key={f} className="flex items-center gap-1.5 text-xs text-slate-400">
+                    <CheckCircle2 className="w-3 h-3 text-slate-500 shrink-0" />
+                    {f}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <a
+              href="#lead-form"
+              className="shrink-0 flex items-center gap-2 text-white font-semibold px-6 py-3 rounded-xl transition-all text-sm hover:scale-[1.02]"
+              style={{
+                background: "rgba(249,115,22,0.20)",
+                border: "1px solid rgba(249,115,22,0.40)",
+              }}
+            >
+              Add a Store
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </motion.div>
+
+        {/* ── Setup charge note ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
+          className="max-w-6xl mx-auto mt-4"
+        >
+          <div
+            className="flex items-center gap-2.5 rounded-2xl px-5 py-3.5"
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.07)",
+            }}
+          >
+            <AlertCircle className="w-4 h-4 text-slate-500 shrink-0" />
+            <p className="text-xs text-slate-500">
+              <span className="text-slate-400 font-semibold">
+                One-time setup charge of ₹1,999
+              </span>{" "}
+              applies to Starter and Business plans. No setup charge for the Custom Plan.
+            </p>
+          </div>
+        </motion.div>
+
         {/* ── Trust row ── */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
           className="flex flex-wrap justify-center gap-6 sm:gap-10 mt-14"
         >
           {[
