@@ -422,7 +422,7 @@ export default function WhatIsIncluded() {
           className="text-center mb-14"
         >
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#f97316] bg-[#f97316]/10 border border-[#f97316]/25 px-4 py-1.5 rounded-full mb-5">
-            Standard Plan Includes
+            Business Plan Includes
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[1.1] mb-4">
             Everything You Need To{" "}
@@ -438,7 +438,7 @@ export default function WhatIsIncluded() {
             </span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            Complete business solution included in every Standard Plan.{" "}
+            Complete business solution included in the Business Plan.{" "}
             <span className="text-white font-semibold">Six powerful products</span>, one affordable price.
           </p>
         </motion.div>
