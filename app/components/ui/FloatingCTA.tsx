@@ -118,9 +118,9 @@ export default function FloatingCTA() {
               }}
             >
               <div className="min-w-0">
-                <p className="text-[11px] font-bold text-[#0f1f3d] leading-tight">Standard Plan</p>
+                <p className="text-[11px] font-bold text-[#0f1f3d] leading-tight">Starter from ₹2,999 &bull; Business ₹4,999</p>
                 <p className="text-[11px] text-slate-500 leading-tight">
-                  <span className="font-bold text-[#1a3a6b]">₹4,999</span>/month &bull; Setup ₹1,999
+                  <span className="font-bold text-[#1a3a6b]">/month</span> &bull; One-time setup ₹1,999
                 </p>
               </div>
               <div className="flex gap-2 shrink-0">
