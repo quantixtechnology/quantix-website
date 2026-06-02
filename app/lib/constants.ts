@@ -102,7 +102,7 @@ export const HOW_IT_WORKS_STEPS = [
     iconKey: "ClipboardList",
     title: "Choose Plan",
     description:
-      "Pick the plan that fits your business. Monthly, yearly, or a one-time setup — flexible options for everyone.",
+      "Pick the Starter or Business plan that fits your business. One-time setup of ₹1,999 — flexible options for every stage of growth.",
   },
   {
     step: "02",
