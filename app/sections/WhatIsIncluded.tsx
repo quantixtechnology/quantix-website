@@ -812,7 +812,7 @@ export default function WhatIsIncluded() {
                 boxShadow: "0 8px 24px rgba(249,115,22,0.38)",
               }}
             >
-              Launch My App
+              Get Started
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
