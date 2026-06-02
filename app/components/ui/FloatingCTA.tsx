@@ -6,7 +6,7 @@ import { X, ArrowUp } from "lucide-react";
 
 const WHATSAPP_NUMBER = "919999999999"; // ← Replace with your actual WhatsApp number
 const WHATSAPP_MSG = encodeURIComponent(
-  "Hi! I'm interested in the Quantix Standard Plan. Can you share more details?"
+  "Hi! I'm interested in Quantix's business management plans. Can you share more details?"
 );
 
 export default function FloatingCTA() {
