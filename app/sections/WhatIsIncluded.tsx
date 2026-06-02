@@ -798,9 +798,9 @@ export default function WhatIsIncluded() {
                 6 Powerful Products
               </h3>
               <p className="text-slate-400 text-sm leading-relaxed mb-0">
-                Customer App · Ecommerce Website · Admin Panel · Delivery Partner App · POS Billing · Mobile Admin
+                Customer Android App · Website &amp; PWA · Admin Panel · Delivery Android App · POS System · Delivery Management
                 {" "}—{" "}
-                <span className="text-white font-semibold">all included in one Standard Plan.</span>
+                <span className="text-white font-semibold">all included in the Business Plan.</span>
               </p>
             </div>
 
