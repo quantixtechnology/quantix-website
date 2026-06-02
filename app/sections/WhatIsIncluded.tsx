@@ -556,10 +556,10 @@ export default function WhatIsIncluded() {
                   </div>
                   <div>
                     <h3 className="text-lg font-black text-white leading-tight">
-                      Delivery Partner App
+                      Delivery Management
                     </h3>
                     <p className="text-orange-200 text-xs font-medium">
-                      For your in-house delivery team
+                      Delivery Android App + full delivery ecosystem
                     </p>
                   </div>
                 </div>
