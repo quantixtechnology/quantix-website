@@ -56,23 +56,30 @@ export const FEATURES_DATA = [
   },
 ];
 
-export const PLAN_FEATURES = [
+export const STARTER_FEATURES = [
+  "Customer Website",
+  "Progressive Web App (PWA)",
+  "Admin Panel",
+  "POS System",
+  "Product Management",
+  "Inventory Management",
+  "Order Management",
+  "Customer Management",
+  "Basic Reports",
+];
+
+export const BUSINESS_EXTRA_FEATURES = [
   "Customer Android App",
-  "Ecommerce Website",
-  "Admin Dashboard Panel",
-  "Android Admin App",
-  "Delivery Partner App",
-  "POS Billing System",
-  "24-hour setup & launch",
-  "Priority support",
+  "Delivery Android App",
+  "Delivery Management",
+  "1 Store Included",
 ];
 
 export const PRICING = {
-  monthly: 4999,
+  starter: 2999,
+  business: 4999,
   setup: 1999,
-  yearly: 49999,
-  // 4999 × 12 = 59,988 → save 9,989 ≈ 2 months free
-  yearlySavings: 9989,
+  additionalStore: 1999,
 };
 
 export const BUSINESS_TYPES: { label: string; value: string }[] = [
