@@ -613,10 +613,10 @@ export default function WhatIsIncluded() {
                 }}
               >
                 <p className="text-xs font-semibold text-[#f97316] mb-1.5">
-                  Complete business ecosystem:
+                  Business Plan ecosystem:
                 </p>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Customer App · Ecommerce Website · Admin Panel · Delivery App · POS · Mobile Admin
+                  Customer Android App · Website &amp; PWA · Admin Panel · Delivery Android App · POS System · Delivery Management
                 </p>
               </div>
             </div>
