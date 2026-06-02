@@ -579,7 +579,7 @@ export default function WhatIsIncluded() {
 
               {/* Description */}
               <p className="text-slate-400 text-sm leading-relaxed mb-5">
-                Empower your delivery staff with a dedicated Android app. Manage your own in-house delivery team without depending on third-party services like Swiggy or Zomato.
+                Manage your own in-house delivery team without depending on third-party services like Swiggy or Zomato. The Delivery Android App for your staff is launching soon.
               </p>
 
               {/* Features grid */}
