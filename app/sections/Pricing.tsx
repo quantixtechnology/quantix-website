@@ -151,8 +151,8 @@ export default function Pricing() {
         {/* ── Ecosystem product strip ── */}
         <EcosystemStrip />
 
-        {/* ── 3-column pricing grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto items-stretch">
+        {/* ── 4-column pricing grid ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-7xl mx-auto items-stretch">
 
           {/* ━━━ Card 1: Starter ━━━ */}
           <motion.div
