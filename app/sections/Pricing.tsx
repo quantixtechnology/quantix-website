@@ -143,8 +143,8 @@ export default function Pricing() {
             </span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            No hidden fees. One-time setup charge of ₹1,999 applies to Starter
-            and Business plans. Everything you need to launch and grow.
+            No hidden fees. One-time setup charge of ₹1,999 applies to Starter,
+            Business, and Business Yearly plans. Everything you need to launch and grow.
           </p>
         </motion.div>
 
