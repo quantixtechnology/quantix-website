@@ -625,7 +625,7 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
-          className="max-w-6xl mx-auto mt-4"
+          className="max-w-7xl mx-auto mt-4"
         >
           <div
             className="flex items-center gap-2.5 rounded-2xl px-5 py-3.5"
