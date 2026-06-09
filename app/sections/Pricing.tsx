@@ -559,7 +559,7 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.35, ease: "easeOut" }}
-          className="max-w-6xl mx-auto mt-5"
+          className="max-w-7xl mx-auto mt-5"
         >
           <div
             className="rounded-3xl border flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8 p-6 sm:p-8 hover:-translate-y-0.5 transition-transform duration-300"
