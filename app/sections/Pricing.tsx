@@ -345,7 +345,105 @@ export default function Pricing() {
             </div>
           </motion.div>
 
-          {/* ━━━ Card 3: Custom ━━━ */}
+          {/* ━━━ Card 3: Business Yearly ━━━ */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.20, ease: "easeOut" }}
+            className="group relative rounded-3xl overflow-hidden border flex flex-col hover:-translate-y-1 transition-transform duration-300"
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              borderColor: "rgba(16,185,129,0.22)",
+            }}
+            whileHover={{
+              borderColor: "rgba(16,185,129,0.45)",
+              boxShadow: "0 20px 48px rgba(16,185,129,0.12)",
+            }}
+          >
+            <div className="p-7 flex flex-col flex-1">
+              {/* Label row */}
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                  Business Yearly
+                </span>
+                <span
+                  className="text-xs font-bold px-3 py-1 rounded-full"
+                  style={{
+                    background: "rgba(16,185,129,0.15)",
+                    border: "1px solid rgba(16,185,129,0.30)",
+                    color: "#10b981",
+                  }}
+                >
+                  Get 2 Months Free
+                </span>
+              </div>
+
+              {/* Price */}
+              <div className="mb-6">
+                <div className="flex items-end gap-1 mb-1.5">
+                  <span className="text-5xl font-black text-white leading-none">
+                    ₹{PRICING.businessYearly.toLocaleString("en-IN")}
+                  </span>
+                  <span className="text-slate-400 text-sm mb-1">/year</span>
+                </div>
+                <div className="flex items-center gap-1.5 mt-2">
+                  <span
+                    className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                    style={{ background: "#10b981" }}
+                  />
+                  <span className="text-slate-400 text-xs">
+                    ₹{PRICING.setup.toLocaleString("en-IN")}{" "}
+                    <span className="text-slate-500">one-time setup charge</span>
+                  </span>
+                </div>
+                <p className="text-slate-600 text-xs mt-1.5">
+                  Best value for businesses committed to annual growth.
+                </p>
+              </div>
+
+              {/* Divider */}
+              <div className="h-px mb-5" style={{ background: "rgba(255,255,255,0.07)" }} />
+
+              {/* Feature list */}
+              <ul className="space-y-2.5 flex-1 mb-5">
+                {BUSINESS_ALL_FEATURES.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                    <span className="text-xs text-slate-400">{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Android apps note */}
+              <div
+                className="rounded-xl px-4 py-3 mb-5"
+                style={{
+                  background: "rgba(249,115,22,0.08)",
+                  border: "1px solid rgba(249,115,22,0.18)",
+                }}
+              >
+                <p className="text-[11px] text-slate-400 leading-relaxed">
+                  <span className="text-[#f97316] font-semibold">Note:</span>{" "}
+                  Customer &amp; Delivery Android Apps are launching soon. Until then,
+                  customers can use the Website and PWA without any limitations.
+                </p>
+              </div>
+
+              {/* CTA */}
+              <a
+                href="#lead-form"
+                className="flex items-center justify-center gap-2 w-full border text-white font-semibold py-3 rounded-xl transition-all text-sm hover:scale-[1.02] hover:bg-emerald-500/10"
+                style={{
+                  borderColor: "rgba(16,185,129,0.40)",
+                }}
+              >
+                <Calendar className="w-4 h-4 text-emerald-500" />
+                Get Started
+              </a>
+            </div>
+          </motion.div>
+
+          {/* ━━━ Card 4: Custom ━━━ */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
