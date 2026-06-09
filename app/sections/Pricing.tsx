@@ -239,7 +239,7 @@ export default function Pricing() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
-            className="relative rounded-3xl overflow-hidden flex flex-col md:-mt-6 md:mb-6"
+            className="relative rounded-3xl overflow-hidden flex flex-col lg:-mt-6 lg:mb-6"
             style={{
               boxShadow:
                 "0 0 0 1.5px rgba(249,115,22,0.55), 0 32px 72px rgba(249,115,22,0.28)",
