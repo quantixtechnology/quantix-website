@@ -512,6 +512,15 @@ export default function Pricing() {
 
               {/* Feature list */}
               <ul className="space-y-2.5 flex-1 mb-6">
+                {BUSINESS_ALL_FEATURES.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                    <span className="text-xs text-slate-400">{f}</span>
+                  </li>
+                ))}
+                <li>
+                  <div className="h-px my-1" style={{ background: "rgba(99,102,241,0.15)" }} />
+                </li>
                 {CUSTOM_FEATURES.map(({ icon: Icon, text }) => (
                   <li key={text} className="flex items-center gap-2.5">
                     <div
