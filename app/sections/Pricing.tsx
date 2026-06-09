@@ -16,7 +16,7 @@ import {
   AlertCircle,
   Calendar,
 } from "lucide-react";
-import { PRICING, STARTER_FEATURES, BUSINESS_EXTRA_FEATURES, BUSINESS_ALL_FEATURES } from "@/app/lib/constants";
+import { PRICING, STARTER_FEATURES, BUSINESS_ALL_FEATURES } from "@/app/lib/constants";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
