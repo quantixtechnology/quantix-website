@@ -277,7 +277,7 @@ export default function Pricing() {
               </div>
 
               {/* Price */}
-              <div className="mb-2">
+              <div className="mb-6">
                 <div className="flex items-end gap-1 mb-1.5">
                   <span className="text-5xl font-black text-white leading-none">
                     ₹{PRICING.business.toLocaleString("en-IN")}
@@ -299,26 +299,12 @@ export default function Pricing() {
                 </p>
               </div>
 
-              {/* Everything in Starter callout */}
-              <div
-                className="flex items-center gap-2 rounded-xl px-4 py-2.5 mb-4"
-                style={{
-                  background: "rgba(34,197,94,0.10)",
-                  border: "1px solid rgba(34,197,94,0.25)",
-                }}
-              >
-                <span className="text-green-400 text-sm">✦</span>
-                <p className="text-green-400 text-xs font-bold">
-                  Everything in Starter Plan, plus:
-                </p>
-              </div>
-
               {/* Divider */}
               <div className="h-px mb-4" style={{ background: "rgba(255,255,255,0.08)" }} />
 
-              {/* Business extras */}
+              {/* All features */}
               <ul className="space-y-2.5 flex-1 mb-4">
-                {BUSINESS_EXTRA_FEATURES.map((item) => (
+                {BUSINESS_ALL_FEATURES.map((item) => (
                   <li key={item} className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-[#f97316] shrink-0" />
                     <span className="text-sm text-slate-200">{item}</span>
