@@ -75,9 +75,15 @@ export const BUSINESS_EXTRA_FEATURES = [
   "1 Store Included",
 ];
 
+export const BUSINESS_ALL_FEATURES = [
+  ...STARTER_FEATURES,
+  ...BUSINESS_EXTRA_FEATURES,
+];
+
 export const PRICING = {
   starter: 2999,
   business: 4999,
+  businessYearly: 49999,
   setup: 1999,
   additionalStore: 1999,
 };
