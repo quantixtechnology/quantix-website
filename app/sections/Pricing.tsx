@@ -639,7 +639,7 @@ export default function Pricing() {
               <span className="text-slate-400 font-semibold">
                 One-time setup charge of ₹1,999
               </span>{" "}
-              applies to Starter and Business plans. No setup charge for the Custom Plan.
+              applies to Starter, Business, and Business Yearly plans. No setup charge for the Custom Plan.
             </p>
           </div>
         </motion.div>
