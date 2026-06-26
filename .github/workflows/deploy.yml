@@ -48,7 +48,7 @@ jobs:
           remote_user: ${{ secrets.VPS_USER }}
           remote_key: ${{ secrets.VPS_SSH_KEY }}
 
-      - name: Restart PM2 on VPS
+      - name: Deploy to AWS EC2 & Restart PM2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -58,8 +58,9 @@ jobs:
           script_stop: true
           script: |
             set -e
-            cd /var/www/quantix-website
+            cd /home/ubuntu/quantix-website
             npm ci --prefer-offline --omit=dev
+            npm run build
             pm2 restart quantix-website --update-env || pm2 start ecosystem.config.js --env production
             pm2 save
             echo "Deploy complete"
