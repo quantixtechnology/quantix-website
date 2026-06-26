@@ -59,9 +59,9 @@ jobs:
           script: |
             set -e
             cd /home/ubuntu/quantix-website
-            npm ci --prefer-offline --omit=dev
+            npm ci
             npm run build
+            npm prune --omit=dev
             pm2 restart quantix-website --update-env || pm2 start ecosystem.config.js --env production
             pm2 save
-            echo "Deploy complete"
             pm2 status
