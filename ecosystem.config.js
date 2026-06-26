@@ -4,7 +4,7 @@ module.exports = {
       name: 'quantix-website',
       script: 'node_modules/.bin/next',
       args: 'start',
-      cwd: '/var/www/quantix-website',
+      cwd: '/home/ubuntu/quantix-website',
       instances: 1,
       exec_mode: 'fork',
       autorestart: true,
