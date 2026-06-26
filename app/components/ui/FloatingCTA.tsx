@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUp } from "lucide-react";
 
-const WHATSAPP_NUMBER = "919999999999"; // ← Replace with your actual WhatsApp number
+const WHATSAPP_NUMBER = "917019160828"; // ← Replace with your actual WhatsApp number
 const WHATSAPP_MSG = encodeURIComponent(
-  "Hi! I'm interested in Quantix's business management plans. Can you share more details?"
+  "Hi Quantix Technology, I would like to know more about your business software."
 );
 
 export default function FloatingCTA() {
