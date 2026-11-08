@@ -20,6 +20,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  const handleMobileNavClick = (href: string) => {
+    setMenuOpen(false);
+
+    if (pathname !== "/" || !href.startsWith("/#")) return;
+
+    const id = href.slice(2);
+    window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 250);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -119,7 +130,7 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => handleMobileNavClick(link.href)}
                   className="text-sm font-medium text-slate-600 hover:text-[#1a3a6b] py-2.5 px-2 rounded-lg hover:bg-slate-50 transition-colors"
                 >
                   {link.label}
@@ -137,7 +148,7 @@ export default function Navbar() {
               <div className="pt-1">
                 <Link
                   href="/#lead-form"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => handleMobileNavClick("/#lead-form")}
                   className="flex items-center justify-center text-sm font-semibold bg-[#f97316] hover:bg-[#ea6c0a] text-white px-4 py-3 rounded-xl transition-colors"
                 >
                   Book Free Demo
