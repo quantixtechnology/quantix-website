@@ -1,8 +1,8 @@
 export const NAV_LINKS = [
-  { label: "Features", href: "#features" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Demo", href: "#lead-form" },
-  { label: "Contact", href: "#lead-form" },
+  { label: "Features", href: "/#features" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Demo", href: "/#lead-form" },
+  { label: "Contact", href: "/#lead-form" },
 ];
 
 export const FEATURES_DATA = [

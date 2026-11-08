@@ -4,11 +4,15 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogIn } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/app/lib/constants";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const isDarkHeader = pathname === "/privacy-policy" && !scrolled;
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16);
@@ -27,27 +31,38 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center shrink-0">
+          <Link
+            href="/"
+            aria-label="Quantix Technology home"
+            className="flex items-center shrink-0"
+          >
             <Image
               src="/New Logo.png"
               alt="Quantix Technology"
               width={360}
               height={90}
               className="h-[60px] w-auto object-contain"
+              style={{
+                filter: isDarkHeader ? "brightness(0) invert(1)" : "none",
+              }}
               priority
             />
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-7">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-slate-600 hover:text-[#1a3a6b] transition-colors"
+                className={`text-sm font-medium transition-colors ${
+                  isDarkHeader
+                    ? "text-blue-100 hover:text-white"
+                    : "text-slate-600 hover:text-[#1a3a6b]"
+                }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -57,22 +72,30 @@ export default function Navbar() {
               href="https://app.quantixtechnology.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-[#1a3a6b] px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+              className={`inline-flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-lg transition-colors ${
+                isDarkHeader
+                  ? "text-blue-100 hover:text-white hover:bg-white/10"
+                  : "text-slate-600 hover:text-[#1a3a6b] hover:bg-slate-50"
+              }`}
             >
               <LogIn className="w-4 h-4" />
               Login
             </a>
-            <a
-              href="#lead-form"
+            <Link
+              href="/#lead-form"
               className="inline-flex items-center gap-2 text-sm font-semibold bg-[#f97316] hover:bg-[#ea6c0a] text-white px-4 py-2 rounded-lg transition-colors shadow-sm"
             >
               Book Demo
-            </a>
+            </Link>
           </div>
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
+            className={`md:hidden p-2 rounded-lg transition-colors ${
+              isDarkHeader
+                ? "text-blue-100 hover:bg-white/10"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -93,14 +116,14 @@ export default function Navbar() {
           >
             <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
                   className="text-sm font-medium text-slate-600 hover:text-[#1a3a6b] py-2.5 px-2 rounded-lg hover:bg-slate-50 transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
               <a
                 href="https://app.quantixtechnology.in"
@@ -112,13 +135,13 @@ export default function Navbar() {
                 Login
               </a>
               <div className="pt-1">
-                <a
-                  href="#lead-form"
+                <Link
+                  href="/#lead-form"
                   onClick={() => setMenuOpen(false)}
                   className="flex items-center justify-center text-sm font-semibold bg-[#f97316] hover:bg-[#ea6c0a] text-white px-4 py-3 rounded-xl transition-colors"
                 >
                   Book Free Demo
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>

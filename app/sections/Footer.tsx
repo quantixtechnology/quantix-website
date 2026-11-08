@@ -1,16 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const footerLinks: Record<string, Array<{ label: string; href: string }>> = {
   Product: [
-    { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Platform", href: "#screenshots" },
+    { label: "Features", href: "/#features" },
+    { label: "Pricing", href: "/#pricing" },
+    { label: "How It Works", href: "/#how-it-works" },
+    { label: "Platform", href: "/#screenshots" },
   ],
   Company: [
     { label: "About Us", href: "#" },
-    { label: "Contact", href: "#lead-form" },
+    { label: "Contact", href: "/#lead-form" },
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "#" },
   ],
@@ -23,7 +24,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <a href="#" className="inline-flex mb-6 group">
+            <Link
+              href="/"
+              aria-label="Quantix Technology home"
+              className="inline-flex mb-6 group"
+            >
               <Image
                 src="/New Logo.png"
                 alt="Quantix Technology"
@@ -32,7 +37,7 @@ export default function Footer() {
                 className="h-[80px] w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
                 style={{ filter: "brightness(0) invert(1)" }}
               />
-            </a>
+            </Link>
             <p className="text-blue-200 text-sm leading-relaxed max-w-xs mb-5">
               Billing, Inventory, Sales &amp; Reports — all in one powerful business
               platform built for Indian businesses.
@@ -63,16 +68,24 @@ export default function Footer() {
                 {group}
               </h4>
               <ul className="space-y-2.5">
-                {links.map((l) => (
-                  <li key={l.label}>
-                    <a
-                      href={l.href}
-                      className="text-sm text-blue-200 hover:text-white transition-colors"
-                    >
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
+                {links.map((l) => {
+                  const className =
+                    "text-sm text-blue-200 hover:text-white transition-colors";
+
+                  return (
+                    <li key={l.label}>
+                      {l.href.startsWith("/") ? (
+                        <Link href={l.href} className={className}>
+                          {l.label}
+                        </Link>
+                      ) : (
+                        <a href={l.href} className={className}>
+                          {l.label}
+                        </a>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
