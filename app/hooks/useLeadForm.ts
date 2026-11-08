@@ -5,6 +5,12 @@ import type { ChangeEvent, SyntheticEvent } from "react";
 import { submitLead, LeadSubmitError } from "@/app/services/leads";
 import type { ToastType } from "@/app/hooks/useToast";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 export interface FormData {
   name: string;
   businessName: string;
@@ -99,6 +105,7 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
           honeypot,
           loadTime: formLoadTimeRef.current,
         });
+        if (!honeypot) window.fbq?.("track", "Lead");
         setFormData(INITIAL);
         setErrors({});
         setCaptchaToken(undefined);

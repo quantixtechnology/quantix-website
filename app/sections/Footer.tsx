@@ -11,7 +11,7 @@ const footerLinks: Record<string, Array<{ label: string; href: string }>> = {
   Company: [
     { label: "About Us", href: "#" },
     { label: "Contact", href: "#lead-form" },
-    { label: "Privacy Policy", href: "#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "#" },
   ],
 };
