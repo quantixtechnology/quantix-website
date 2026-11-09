@@ -30,6 +30,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify Turnstile site key is configured
+        run: |
+          if [ -z "${NEXT_PUBLIC_TURNSTILE_SITE_KEY}" ]; then
+            echo "NEXT_PUBLIC_TURNSTILE_SITE_KEY is not configured" >&2
+            exit 1
+          fi
+        env:
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+
       - name: Build production
         run: npm run build
         env:
@@ -53,12 +62,13 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         env:
           NEXT_PUBLIC_META_PIXEL_ID: '955931683704698'
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
-          envs: NEXT_PUBLIC_META_PIXEL_ID
+          envs: NEXT_PUBLIC_META_PIXEL_ID,NEXT_PUBLIC_TURNSTILE_SITE_KEY
           script_stop: true
           script: |
             set -e

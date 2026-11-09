@@ -22,47 +22,63 @@ interface TurnstileWidgetProps {
 export function TurnstileWidget({ siteKey, onSuccess, onExpire, onError }: TurnstileWidgetProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef  = useRef<string | null>(null);
+  const callbacksRef = useRef({ onSuccess, onExpire, onError });
 
   useEffect(() => {
+    callbacksRef.current = { onSuccess, onExpire, onError };
+  }, [onSuccess, onExpire, onError]);
+
+  useEffect(() => {
+    let pollTimer: ReturnType<typeof setInterval> | undefined;
+
     const render = () => {
       if (!containerRef.current || !window.turnstile || widgetIdRef.current) return;
       widgetIdRef.current = window.turnstile.render(containerRef.current, {
         sitekey:           siteKey,
-        callback:          onSuccess,
-        "expired-callback": onExpire ?? (() => { widgetIdRef.current = null; }),
-        "error-callback":   onError,
+        callback:          (token: string) => callbacksRef.current.onSuccess(token),
+        "expired-callback": () => {
+          if (callbacksRef.current.onExpire) {
+            callbacksRef.current.onExpire();
+          } else if (widgetIdRef.current && window.turnstile) {
+            window.turnstile.reset(widgetIdRef.current);
+          }
+        },
+        "error-callback":   () => callbacksRef.current.onError?.(),
         theme:             "light",
-        appearance:        "interaction-only",
+        appearance:        "always",
       });
     };
 
     if (window.turnstile) {
       render();
-      return;
-    }
-
-    if (!document.getElementById("cf-turnstile-script")) {
-      const script = document.createElement("script");
-      script.id    = "cf-turnstile-script";
-      script.src   = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-      script.async = true;
-      script.onload = render;
-      document.head.appendChild(script);
     } else {
-      const iv = setInterval(() => {
-        if (window.turnstile) { clearInterval(iv); render(); }
-      }, 100);
-      return () => clearInterval(iv);
+      const existing = document.getElementById("cf-turnstile-script") as HTMLScriptElement | null;
+      if (!existing) {
+        const script = document.createElement("script");
+        script.id    = "cf-turnstile-script";
+        script.src   = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+        script.async = true;
+        script.onload = render;
+        script.onerror = () => callbacksRef.current.onError?.();
+        document.head.appendChild(script);
+      } else {
+        pollTimer = setInterval(() => {
+          if (window.turnstile) {
+            if (pollTimer) clearInterval(pollTimer);
+            render();
+          }
+        }, 100);
+      }
     }
-  }, [siteKey, onSuccess, onExpire, onError]);
 
-  useEffect(() => {
     return () => {
+      if (pollTimer) clearInterval(pollTimer);
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
       }
     };
-  }, []);
+  }, [siteKey]);
 
   return <div ref={containerRef} className="mt-1" />;
 }

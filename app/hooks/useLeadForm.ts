@@ -19,7 +19,7 @@ export interface FormData {
   city: string;
 }
 
-export type FormErrors = Partial<Record<keyof FormData, string>>;
+export type FormErrors = Partial<Record<keyof FormData | "captcha", string>>;
 
 const INITIAL: FormData = {
   name: "",
@@ -28,6 +28,13 @@ const INITIAL: FormData = {
   businessType: "",
   city: "",
 };
+
+const CAPTCHA_REQUIRED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+
+function normalizePhone(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length === 12 && digits.startsWith("91") ? digits.slice(2) : digits;
+}
 
 function validate(data: FormData): FormErrors {
   const errors: FormErrors = {};
@@ -38,8 +45,7 @@ function validate(data: FormData): FormErrors {
   if (!data.businessName.trim() || data.businessName.trim().length < 2) {
     errors.businessName = "Please enter your business name";
   }
-  const normalizedPhone = data.phone.replace(/\s/g, "").replace(/^\+91/, "");
-  if (!/^[6-9]\d{9}$/.test(normalizedPhone)) {
+  if (!/^[6-9]\d{9}$/.test(normalizePhone(data.phone))) {
     errors.phone = "Enter a valid 10-digit mobile number";
   }
   if (!data.businessType) {
@@ -70,12 +76,30 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
+  const [captchaResetKey, setCaptchaResetKey] = useState(0);
   const formLoadTimeRef = useRef<number>(Date.now());
+
+  const resetCaptcha = useCallback(() => {
+    setCaptchaToken(undefined);
+    setCaptchaResetKey((key) => key + 1);
+  }, []);
+
+  const handleCaptchaSuccess = useCallback((token: string) => {
+    setCaptchaToken(token);
+    setErrors((prev) => ({ ...prev, captcha: undefined }));
+  }, []);
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const { name, value } = e.target;
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      let nextValue = value;
+
+      if (name === "phone") {
+        nextValue = value.replace(/[^\d+\-() ]/g, "");
+        if (nextValue.replace(/\D/g, "").length > 12) return;
+      }
+
+      setFormData((prev) => ({ ...prev, [name]: nextValue }));
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     },
     []
@@ -91,13 +115,19 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
         return;
       }
 
+      if (CAPTCHA_REQUIRED && !captchaToken) {
+        setErrors((prev) => ({ ...prev, captcha: "Please complete the CAPTCHA verification." }));
+        onToast("error", "Please complete the CAPTCHA verification.");
+        return;
+      }
+
       setIsSubmitting(true);
       try {
         await submitLead({
           payload: {
             name:         formData.name,
             businessName: formData.businessName,
-            phone:        formData.phone,
+            phone:        normalizePhone(formData.phone),
             businessType: formData.businessType,
             city:         formData.city,
             captchaToken,
@@ -108,12 +138,15 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
         if (!honeypot) window.fbq?.("track", "Lead");
         setFormData(INITIAL);
         setErrors({});
-        setCaptchaToken(undefined);
+        resetCaptcha();
         onToast("success", "Thanks! We'll contact you within 24 hours.");
       } catch (err) {
         if (err instanceof LeadSubmitError) {
-          onToast("error", ERROR_MESSAGES[err.type] ?? ERROR_MESSAGES.server);
-          if (err.type === "captcha") setCaptchaToken(undefined);
+          onToast("error", err.message || ERROR_MESSAGES[err.type] || ERROR_MESSAGES.server);
+          if (err.type === "captcha") {
+            setErrors((prev) => ({ ...prev, captcha: "CAPTCHA verification failed. Please try again." }));
+            resetCaptcha();
+          }
         } else {
           onToast("error", ERROR_MESSAGES.server);
         }
@@ -121,7 +154,7 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
         setIsSubmitting(false);
       }
     },
-    [formData, honeypot, captchaToken, onToast]
+    [formData, honeypot, captchaToken, onToast, resetCaptcha]
   );
 
   return {
@@ -131,7 +164,10 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
     honeypot,
     setHoneypot,
     captchaToken,
-    setCaptchaToken,
+    setCaptchaToken: handleCaptchaSuccess,
+    captchaResetKey,
+    resetCaptcha,
+    captchaRequired: CAPTCHA_REQUIRED,
     handleChange,
     handleSubmit,
   };

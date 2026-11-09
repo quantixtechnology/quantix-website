@@ -36,6 +36,8 @@ export default function LeadForm() {
     honeypot,
     setHoneypot,
     setCaptchaToken,
+    captchaResetKey,
+    resetCaptcha,
     handleChange,
     handleSubmit,
   } = useLeadForm({ onToast: showToast });
@@ -157,10 +159,14 @@ export default function LeadForm() {
                     placeholder="98765 43210"
                     className={fieldClass(!!errors.phone)}
                     autoComplete="tel"
-                    maxLength={13}
+                    maxLength={18}
                   />
-                  {errors.phone && (
+                  {errors.phone ? (
                     <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
+                  ) : (
+                    <p className="mt-1 text-xs text-slate-400">
+                      10-digit Indian mobile number. +91 optional.
+                    </p>
                   )}
                 </div>
 
@@ -215,11 +221,20 @@ export default function LeadForm() {
 
                 {/* Turnstile captcha (only rendered if site key is configured) */}
                 {TURNSTILE_SITE_KEY && (
-                  <TurnstileWidget
-                    siteKey={TURNSTILE_SITE_KEY}
-                    onSuccess={setCaptchaToken}
-                    onExpire={() => setCaptchaToken(undefined)}
-                  />
+                  <div>
+                    <TurnstileWidget
+                      key={captchaResetKey}
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onSuccess={setCaptchaToken}
+                      onExpire={resetCaptcha}
+                      onError={() =>
+                        showToast("error", "Verification failed to load. Please refresh the page and try again.")
+                      }
+                    />
+                    {errors.captcha && (
+                      <p className="mt-1 text-xs text-red-500">{errors.captcha}</p>
+                    )}
+                  </div>
                 )}
 
                 {/* Submit */}

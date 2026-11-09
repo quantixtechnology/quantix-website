@@ -41,14 +41,22 @@ export async function submitLead({ payload, honeypot, loadTime }: SubmitOptions)
     }),
   });
 
-  if (res.ok) return;
-
-  let body: { error?: string } = {};
+  let body: { success?: boolean; error?: string } = {};
   try { body = await res.json(); } catch { /* ignore */ }
 
   const msg = body.error ?? "";
 
+  if (res.ok) {
+    if (body.success === true) return;
+    if (body.success === false) {
+      if (msg.toLowerCase().includes("captcha")) throw new LeadSubmitError(msg, "captcha");
+      throw new LeadSubmitError(msg || "Please check your details.", "validation");
+    }
+    throw new LeadSubmitError("Unexpected response. Please try again.", "server");
+  }
+
   if (res.status === 429) throw new LeadSubmitError(msg || "Too many requests. Please wait 10 minutes.", "rate_limit");
+  if (res.status === 503 && msg.toLowerCase().includes("captcha")) throw new LeadSubmitError(msg || "CAPTCHA verification is temporarily unavailable.", "captcha");
   if (res.status === 409) throw new LeadSubmitError(msg || "We already have your details!", "duplicate");
   if (res.status === 400 && msg.toLowerCase().includes("captcha")) throw new LeadSubmitError(msg, "captcha");
   if (res.status === 400) throw new LeadSubmitError(msg || "Please check your details.", "validation");
