@@ -123,7 +123,7 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
 
       setIsSubmitting(true);
       try {
-        await submitLead({
+        const isNewLead = await submitLead({
           payload: {
             name:         formData.name,
             businessName: formData.businessName,
@@ -135,7 +135,7 @@ export function useLeadForm({ onToast }: UseLeadFormOptions) {
           honeypot,
           loadTime: formLoadTimeRef.current,
         });
-        if (!honeypot) window.fbq?.("track", "Lead");
+        if (!honeypot && isNewLead) window.fbq?.("track", "Lead");
         setFormData(INITIAL);
         setErrors({});
         resetCaptcha();

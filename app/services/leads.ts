@@ -25,7 +25,7 @@ interface SubmitOptions {
   loadTime: number;
 }
 
-export async function submitLead({ payload, honeypot, loadTime }: SubmitOptions): Promise<void> {
+export async function submitLead({ payload, honeypot, loadTime }: SubmitOptions): Promise<boolean> {
   const res = await fetch(LEADS_API, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -41,13 +41,13 @@ export async function submitLead({ payload, honeypot, loadTime }: SubmitOptions)
     }),
   });
 
-  let body: { success?: boolean; error?: string } = {};
+  let body: { success?: boolean; duplicate?: boolean; error?: string } = {};
   try { body = await res.json(); } catch { /* ignore */ }
 
   const msg = body.error ?? "";
 
   if (res.ok) {
-    if (body.success === true) return;
+    if (body.success === true) return body.duplicate !== true;
     if (body.success === false) {
       if (msg.toLowerCase().includes("captcha")) throw new LeadSubmitError(msg, "captcha");
       throw new LeadSubmitError(msg || "Please check your details.", "validation");

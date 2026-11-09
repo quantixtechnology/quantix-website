@@ -45,7 +45,7 @@ jobs:
           NODE_ENV: production
           NEXT_PUBLIC_LEADS_API: https://app.quantixtechnology.in/api/public/leads
           NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
-          NEXT_PUBLIC_META_PIXEL_ID: '955931683704698'
+          NEXT_PUBLIC_META_PIXEL_ID: '1751649799262830'
 
       - name: Rsync build to AWS EC2
         uses: burnett01/rsync-deployments@7.0.1
@@ -61,7 +61,7 @@ jobs:
       - name: Deploy to AWS EC2 & Restart PM2
         uses: appleboy/ssh-action@v1.0.3
         env:
-          NEXT_PUBLIC_META_PIXEL_ID: '955931683704698'
+          NEXT_PUBLIC_META_PIXEL_ID: '1751649799262830'
           NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
         with:
           host: ${{ secrets.VPS_HOST }}
